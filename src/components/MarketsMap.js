@@ -41,7 +41,32 @@ const MarketsMap = () => {
             setSelectedMarket(null);
           }}
         >
-          <div>Market deets</div>
+          <div>
+            <h2>{selectedMarket.attributes.NAME}</h2>
+            <p>{selectedMarket.attributes.ADDRESS}</p>
+            <p>{selectedMarket.attributes.ZIP}</p>
+            <h3>Neighborhood:</h3>
+            <p>{selectedMarket.attributes.NEIGHBORHOOD}</p>
+            <h3>Months Open:</h3>
+            <p>{selectedMarket.attributes.MONTHS}</p>
+            <h3>Day and time:</h3>
+            <p>{selectedMarket.attributes.DAY}</p>
+            <p>{selectedMarket.attributes.TIME}</p>
+            {selectedMarket.attributes.ACCEPT_FMNP === 'Y' ||
+            selectedMarket.attributes.ACCEPT_PHILLY_FOOD_BUCKS_ ||
+            selectedMarket.attributes.ACCEPT_SNAP_ACCESS === 'Y' ? (
+              <h3>Food Assistance:</h3>
+            ) : null}
+            {selectedMarket.attributes.ACCEPT_FMNP === 'Y' && (
+              <p>Farmers Market Nutrition Program</p>
+            )}
+            {selectedMarket.attributes.ACCEPT_PHILLY_FOOD_BUCKS_ === 'Y' && (
+              <p>Philly Food Bucks</p>
+            )}
+            {selectedMarket.attributes.ACCEPT_SNAP_ACCESS === 'Y' && (
+              <p>SNAP</p>
+            )}
+          </div>
         </InfoWindow>
       )}
     </GoogleMap>
