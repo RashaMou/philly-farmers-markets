@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from 'react-places-autocomplete';
 import { InputText } from 'primereact/inputtext';
+import LocationContext from '../contexts/LocationContext';
 
 const SearchInput = props => {
   const [address, setAddress] = useState('');
+
+  const { setCoordinates } = useContext(LocationContext);
 
   const handleChange = place => {
     setAddress(place);
@@ -17,15 +20,10 @@ const SearchInput = props => {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         console.log('latlng', latLng);
+        setCoordinates(latLng);
       })
       .catch(error => console.error('Error', error));
     setAddress(place);
-  };
-
-  const searchOptions = {
-    location: new window.google.maps.LatLng(39.952583, -75.165222),
-    radius: 2000
-    // types: ['address']
   };
 
   return (
@@ -33,7 +31,6 @@ const SearchInput = props => {
       value={address}
       onChange={handleChange}
       onSelect={handleSelect}
-      searchOptions={searchOptions}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>

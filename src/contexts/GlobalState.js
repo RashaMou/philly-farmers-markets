@@ -7,11 +7,15 @@ const GlobalState = props => {
     lng: -75.165222
   });
 
+  const [markets, setMarkets] = useState([]);
+
   return (
     <LocationContext.Provider
       value={{
         setCoordinates,
-        coordinates
+        coordinates,
+        setMarkets,
+        markets
       }}
     >
       {props.children}
