@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
-import MapContainer from './components/MarketMap';
+import MarketsMap from './components/MarketsMap';
 import SearchInput from './components/SearchInput';
 
 function App() {
@@ -12,7 +12,10 @@ function App() {
       <div>
         <Sidebar />
         <SearchInput />
-        <MapContainer />
+        <MarketsMap
+          containerElement={<div style={{ height: `100vh` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </div>
     </div>
   );
