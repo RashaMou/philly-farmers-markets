@@ -24,8 +24,8 @@ const SearchInput = props => {
 
   const searchOptions = {
     location: new window.google.maps.LatLng(39.952583, -75.165222),
-    radius: 2000,
-    types: ['address']
+    radius: 2000
+    // types: ['address']
   };
 
   return (
@@ -33,6 +33,7 @@ const SearchInput = props => {
       value={address}
       onChange={handleChange}
       onSelect={handleSelect}
+      searchOptions={searchOptions}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
