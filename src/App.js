@@ -1,7 +1,6 @@
 import React from 'react';
-import Sidebar from './components/Sidebar';
+import FilterBar from './components/FilterBar';
 import MarketsMap from './components/MarketsMap';
-import SearchInput from './components/SearchInput';
 
 function App() {
   return (
@@ -10,8 +9,7 @@ function App() {
         <h1>Farmer's Markets in Philly</h1>
       </header>
       <div>
-        <Sidebar />
-        <SearchInput />
+        <FilterBar />
         <MarketsMap
           containerElement={<div style={{ height: `100vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}

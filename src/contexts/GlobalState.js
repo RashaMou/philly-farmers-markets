@@ -35,6 +35,8 @@ const GlobalState = props => {
       });
   };
 
+  const [filters, setFilters] = useState({});
+
   return (
     <LocationContext.Provider
       value={{
@@ -42,7 +44,8 @@ const GlobalState = props => {
         coordinates,
         setMarkets,
         markets,
-        getMarkets
+        getMarkets,
+        setFilters
       }}
     >
       {props.children}
