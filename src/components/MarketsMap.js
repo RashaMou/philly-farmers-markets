@@ -22,6 +22,7 @@ const MarketsMap = () => {
       defaultZoom={14}
       defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
       onClick={() => setSelectedMarket(null)}
+      defaultOptions={{ mapTypeControl: false }}
     >
       {markets.map((market, index) => {
         return (

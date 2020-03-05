@@ -114,42 +114,67 @@ const Filters = () => {
 
   return (
     <div>
-      <h2>Neighborhoods</h2>
-      <ul>
-        {checkboxValues.neighborhoods.map((neighborhood, index) => {
-          return (
-            <Checkbox
-              key={index}
-              handleCheck={handleCheckNeighborhoods}
-              {...neighborhood}
-            />
-          );
-        })}
-      </ul>
-      <h2>Food Assistance Programs</h2>
-      <ul>
-        {checkboxValues.foodAssistance.map((program, index) => {
-          return (
-            <Checkbox
-              key={index}
-              handleCheck={handleCheckFoodAssistance}
-              {...program}
-            />
-          );
-        })}
-      </ul>
-      <h2>Open</h2>
-      <ul>
-        {checkboxValues.open.map((time, index) => {
-          return (
-            <Checkbox key={index} handleCheck={handleCheckOpen} {...time} />
-          );
-        })}
-      </ul>
-      <button onClick={() => filterMarkets(markets, filters, setMarkets)}>
-        Save
-      </button>
-      <button onClick={resetFilters}>Reset Filters</button>
+      <div className='filters-header'>
+        <h2>Filter Markets By:</h2>
+      </div>
+      <div className='filters-info'>
+        <div className='filter-group-header-container'>
+          <h2 className='filter-group-header'>Neighborhoods</h2>
+        </div>
+        <ul className='filter-group'>
+          {checkboxValues.neighborhoods.map((neighborhood, index) => {
+            return (
+              <Checkbox
+                className='filter'
+                key={index}
+                handleCheck={handleCheckNeighborhoods}
+                {...neighborhood}
+              />
+            );
+          })}
+        </ul>
+        <div className='filter-group-header-container'>
+          <h2 className='filter-group-header'>Food Assistance Programs</h2>
+        </div>
+        <ul className='filter-group'>
+          {checkboxValues.foodAssistance.map((program, index) => {
+            return (
+              <Checkbox
+                className='filter'
+                key={index}
+                handleCheck={handleCheckFoodAssistance}
+                {...program}
+              />
+            );
+          })}
+        </ul>
+        <div className='filter-group-header-container'>
+          <h2 className='filter-group-header'>Open</h2>
+        </div>
+        <ul className='filter-group'>
+          {checkboxValues.open.map((time, index) => {
+            return (
+              <Checkbox
+                className='filter'
+                key={index}
+                handleCheck={handleCheckOpen}
+                {...time}
+              />
+            );
+          })}
+        </ul>
+        <div className='buttons'>
+          <button
+            className='filter-button'
+            onClick={() => filterMarkets(markets, filters, setMarkets)}
+          >
+            Save
+          </button>
+          <button className='filter-button' onClick={resetFilters}>
+            Reset Filters
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

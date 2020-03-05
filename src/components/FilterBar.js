@@ -15,7 +15,7 @@ const FilterBar = () => {
     <div onClick={() => setSelectedMarket(null)}>
       <Sidebar
         sidebar={
-          <div>
+          <div className='filter-sidebar'>
             <Filters />
           </div>
         }
@@ -23,7 +23,12 @@ const FilterBar = () => {
         onSetOpen={onSetSidebarOpen}
         styles={{ sidebar: { background: 'white' } }}
       >
-        <h2 onClick={() => setSidebarOpen(true)}>Filters</h2>
+        <h2
+          className='filters-menu-title'
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          Filters >>
+        </h2>
       </Sidebar>
     </div>
   );

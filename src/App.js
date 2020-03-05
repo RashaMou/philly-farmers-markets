@@ -1,12 +1,13 @@
 import React from 'react';
 import FilterBar from './components/FilterBar';
 import MarketsMap from './components/MarketsMap';
+import logo from './assets/logo.png';
 
 function App() {
   return (
     <div className='App'>
       <header className='header'>
-        <h1>Farmer's Markets in Philly</h1>
+        <img className='logo' src={logo} alt='Logo' />
       </header>
       <div>
         <FilterBar />
