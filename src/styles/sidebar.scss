@@ -12,7 +12,7 @@
 }
 
 .filters-header {
-  height: 124px;
+  height: 150px;
   background-color: orange;
   display: flex;
   justify-content: center;
@@ -42,8 +42,8 @@
   border-bottom: 2px solid orange;
   margin-bottom: 10px;
 
-  .filter-group-header {
-    margin-bottom: 7px;
+  .is-5 {
+    padding-bottom: 6px;
   }
 }
 
@@ -51,21 +51,12 @@
   margin-top: 6rem;
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-end;
-  .filter-button {
-    color: #3d4954;
-    width: 100px;
-    height: 40px;
-    border: none;
+
+  .save {
+    background-color: #41da83;
+  }
+
+  .reset {
     background-color: orange;
-    margin-left: 3px;
-    border-radius: 3%;
-    font-size: 0.9rem;
-    &:hover {
-      cursor: pointer;
-    }
-    &:active {
-      box-shadow: inset 4px 2px 22px -10px rgba(0, 0, 0, 0.75);
-    }
   }
 }

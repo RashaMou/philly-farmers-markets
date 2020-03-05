@@ -130,7 +130,7 @@ const Filters = props => {
       </div>
       <div className='filters-info'>
         <div className='filter-group-header-container'>
-          <h2 className='filter-group-header'>Neighborhoods</h2>
+          <h2 className='title is-5'>Neighborhoods</h2>
         </div>
         <ul className='filter-group'>
           {checkboxValues.neighborhoods.map((neighborhood, index) => {
@@ -144,7 +144,7 @@ const Filters = props => {
           })}
         </ul>
         <div className='filter-group-header-container'>
-          <h2 className='filter-group-header'>Food Assistance Programs</h2>
+          <h2 className='title is-5'>Food Assistance Programs</h2>
         </div>
         <ul className='filter-group'>
           {checkboxValues.foodAssistance.map((program, index) => {
@@ -158,7 +158,7 @@ const Filters = props => {
           })}
         </ul>
         <div className='filter-group-header-container'>
-          <h2 className='filter-group-header'>Open</h2>
+          <h2 className='title is-5'>Open</h2>
         </div>
         <ul className='filter-group'>
           {checkboxValues.open.map((time, index) => {
@@ -168,10 +168,10 @@ const Filters = props => {
           })}
         </ul>
         <div className='buttons'>
-          <button className='filter-button' onClick={saveFilters}>
+          <button className='button save' onClick={saveFilters}>
             Save
           </button>
-          <button className='filter-button' onClick={resetFilters}>
+          <button className='button reset' onClick={resetFilters}>
             Reset Filters
           </button>
         </div>
