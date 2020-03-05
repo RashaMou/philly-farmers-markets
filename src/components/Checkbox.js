@@ -2,7 +2,7 @@ import React from 'react';
 
 export const CheckBox = props => {
   return (
-    <li>
+    <li className='checkbox'>
       <input
         key={props.id}
         onChange={props.handleCheck}

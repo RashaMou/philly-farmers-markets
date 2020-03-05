@@ -16,12 +16,12 @@ const FilterBar = () => {
       <Sidebar
         sidebar={
           <div className='filter-sidebar'>
-            <Filters />
+            <Filters setSidebarOpen={setSidebarOpen} />
           </div>
         }
         open={sidebarOpen}
         onSetOpen={onSetSidebarOpen}
-        styles={{ sidebar: { background: 'white' } }}
+        styles={{ sidebar: { background: 'white', width: 350 } }}
       >
         <h2
           className='filters-menu-title'

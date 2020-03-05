@@ -5,7 +5,7 @@ import filterMarkets from '../helpers/filterMarkets';
 import getMarkets from '../helpers/getMarkets';
 import { dayOfTheWeek } from '../helpers/dates';
 
-const Filters = () => {
+const Filters = props => {
   const { setFilters, filters, markets, setMarkets } = useContext(
     LocationContext
   );
@@ -93,7 +93,12 @@ const Filters = () => {
     }
   };
 
+  const saveFilters = () => {
+    filterMarkets(markets, filters, setMarkets);
+    props.setSidebarOpen(false);
+  };
   const resetFilters = event => {
+    props.setSidebarOpen(false);
     getMarkets(setMarkets);
     let neighborhoods = checkboxValues.neighborhoods;
     neighborhoods.forEach(
@@ -125,7 +130,6 @@ const Filters = () => {
           {checkboxValues.neighborhoods.map((neighborhood, index) => {
             return (
               <Checkbox
-                className='filter'
                 key={index}
                 handleCheck={handleCheckNeighborhoods}
                 {...neighborhood}
@@ -140,7 +144,6 @@ const Filters = () => {
           {checkboxValues.foodAssistance.map((program, index) => {
             return (
               <Checkbox
-                className='filter'
                 key={index}
                 handleCheck={handleCheckFoodAssistance}
                 {...program}
@@ -154,20 +157,12 @@ const Filters = () => {
         <ul className='filter-group'>
           {checkboxValues.open.map((time, index) => {
             return (
-              <Checkbox
-                className='filter'
-                key={index}
-                handleCheck={handleCheckOpen}
-                {...time}
-              />
+              <Checkbox key={index} handleCheck={handleCheckOpen} {...time} />
             );
           })}
         </ul>
         <div className='buttons'>
-          <button
-            className='filter-button'
-            onClick={() => filterMarkets(markets, filters, setMarkets)}
-          >
+          <button className='filter-button' onClick={saveFilters}>
             Save
           </button>
           <button className='filter-button' onClick={resetFilters}>
