@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Sidebar from 'react-sidebar';
 import Filters from './Filters';
+import LocationContext from '../contexts/LocationContext';
 
 const FilterBar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { setSelectedMarket } = useContext(LocationContext);
 
   const onSetSidebarOpen = open => {
     setSidebarOpen(open);
   };
 
   return (
-    <div>
+    <div onClick={() => setSelectedMarket(null)}>
       <Sidebar
         sidebar={
           <div>

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import Checkbox from './Checkbox';
 import LocationContext from '../contexts/LocationContext';
 import filterMarkets from '../helpers/filterMarkets';
+import getMarkets from '../helpers/getMarkets';
 
 const Filters = () => {
   const { setFilters, filters, markets, setMarkets } = useContext(
@@ -50,8 +51,6 @@ const Filters = () => {
     const checkedNeighborhoods = checkedValues.map(value => {
       return value.value;
     });
-
-    // console.log(checkedNeighborhoods);
     setFilters({ ...filters, checkedNeighborhoods });
   };
 
@@ -91,6 +90,25 @@ const Filters = () => {
     setFilters({ ...filters, checkedOpen });
   };
 
+  const resetFilters = event => {
+    getMarkets(setMarkets);
+    let neighborhoods = checkboxValues.neighborhoods;
+    neighborhoods.forEach(
+      neighborhood => (neighborhood.isChecked = event.target.checked)
+    );
+    setCheckboxValues({ ...checkboxValues, neighborhoods: neighborhoods });
+
+    let foodAssistance = checkboxValues.foodAssistance;
+    foodAssistance.forEach(
+      program => (program.isChecked = event.target.checked)
+    );
+    setCheckboxValues({ ...checkboxValues, foodAssistance: foodAssistance });
+
+    let open = checkboxValues.open;
+    open.forEach(time => (time.isChecked = event.target.checked));
+    setCheckboxValues({ ...checkboxValues, open: open });
+  };
+
   return (
     <div>
       <h2>Neighborhoods</h2>
@@ -128,6 +146,7 @@ const Filters = () => {
       <button onClick={() => filterMarkets(markets, filters, setMarkets)}>
         Save
       </button>
+      <button onClick={resetFilters}>Reset Filters</button>
     </div>
   );
 };

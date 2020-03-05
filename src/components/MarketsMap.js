@@ -9,8 +9,9 @@ import LocationContext from '../contexts/LocationContext';
 import getMarkets from '../helpers/getMarkets';
 
 const MarketsMap = () => {
-  const { markets, setMarkets } = useContext(LocationContext);
-  const [selectedMarket, setSelectedMarket] = useState(null);
+  const { markets, setMarkets, selectedMarket, setSelectedMarket } = useContext(
+    LocationContext
+  );
 
   useEffect(() => {
     getMarkets(setMarkets);
@@ -20,6 +21,7 @@ const MarketsMap = () => {
     <GoogleMap
       defaultZoom={14}
       defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
+      onClick={() => setSelectedMarket(null)}
     >
       {markets.map((market, index) => {
         return (

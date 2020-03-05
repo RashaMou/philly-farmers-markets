@@ -9,6 +9,8 @@ const GlobalState = props => {
 
   const [filters, setFilters] = useState([]);
 
+  const [selectedMarket, setSelectedMarket] = useState(null);
+
   const [markets, setMarkets] = useState([]);
 
   return (
@@ -19,7 +21,9 @@ const GlobalState = props => {
         markets,
         setMarkets,
         setFilters,
-        filters
+        filters,
+        selectedMarket,
+        setSelectedMarket
       }}
     >
       {props.children}
