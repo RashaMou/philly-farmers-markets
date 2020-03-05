@@ -80,17 +80,23 @@ const Filters = props => {
 
   const handleCheckOpen = event => {
     let open = checkboxValues.open;
+    // goes through each property in checkboxValues.open and checks if that is the one that is checked
     open.forEach(time => {
       if (time.value === event.target.value)
         time.isChecked = event.target.checked;
     });
     setCheckboxValues({ ...checkboxValues, open: open });
-    const checkedValues = open.filter(time => {
-      return time.isChecked === true;
-    });
-    const checkedOpen = checkedValues.map(value => {
-      return value.value;
-    });
+
+    // returns an array of only the ones that are true
+    const checkedOpen = open
+      .filter(time => {
+        return time.isChecked === true;
+      })
+      .map(value => {
+        return value.value;
+      });
+
+    console.log('checkedOpen', checkedOpen);
 
     if (checkedOpen.includes('Open today')) {
       let today = dayOfTheWeek();
