@@ -32,6 +32,10 @@ const MarketsMap = () => {
             onClick={() => {
               setSelectedMarket(market);
             }}
+            icon={{
+              url: require('../assets/marker3.png'),
+              scaledSize: { width: 65, height: 65 }
+            }}
           />
         );
       })}
