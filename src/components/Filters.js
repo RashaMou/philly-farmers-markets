@@ -1,21 +1,39 @@
 import React, { useState, useContext } from 'react';
 import Checkbox from './Checkbox';
 import LocationContext from '../contexts/LocationContext';
+import filterMarkets from '../helpers/filterMarkets';
 
 const Filters = () => {
-  const { setFilters } = useContext(LocationContext);
-
+  const { setFilters, filters, markets, setMarkets } = useContext(
+    LocationContext
+  );
   const [checkboxValues, setCheckboxValues] = useState({
     neighborhoods: [
       { value: 'West', isChecked: false },
       { value: 'South', isChecked: false },
       { value: 'Center City', isChecked: false },
-      { value: 'Southwest', isChecked: false }
+      { value: 'Southwest', isChecked: false },
+      { value: 'Bridesburg/Kensington/Port Richmond', isChecked: false },
+      { value: 'Northeast', isChecked: false },
+      { value: 'Germantown/ Chestnut Hill', isChecked: false },
+      { value: 'Roxborough/ Manayunk', isChecked: false },
+      { value: 'North', isChecked: false },
+      { value: 'Northwest', isChecked: false }
     ],
     foodAssistance: [
       { value: 'SNAP', isChecked: false },
       { value: 'Philly Food Bucks', isChecked: false },
       { value: 'Farmers Market Nutrition Program', isChecked: false }
+    ],
+    open: [
+      {
+        value: 'Open this month',
+        isChecked: false
+      },
+      {
+        value: 'Open today',
+        isChecked: false
+      }
     ]
   });
 
@@ -33,7 +51,8 @@ const Filters = () => {
       return value.value;
     });
 
-    console.log(checkedNeighborhoods);
+    // console.log(checkedNeighborhoods);
+    setFilters({ ...filters, checkedNeighborhoods });
   };
 
   const handleCheckFoodAssistance = event => {
@@ -50,7 +69,26 @@ const Filters = () => {
       return value.value;
     });
 
-    console.log(checkedFoodAssistance);
+    // console.log(checkedFoodAssistance);
+    setFilters({ ...filters, checkedFoodAssistance });
+  };
+
+  const handleCheckOpen = event => {
+    let open = checkboxValues.open;
+    open.forEach(time => {
+      if (time.value === event.target.value)
+        time.isChecked = event.target.checked;
+    });
+    setCheckboxValues({ ...checkboxValues, open: open });
+    const checkedValues = open.filter(time => {
+      return time.isChecked === true;
+    });
+    const checkedOpen = checkedValues.map(value => {
+      return value.value;
+    });
+
+    // console.log(checkedOpen);
+    setFilters({ ...filters, checkedOpen });
   };
 
   return (
@@ -79,6 +117,17 @@ const Filters = () => {
           );
         })}
       </ul>
+      <h2>Open</h2>
+      <ul>
+        {checkboxValues.open.map((time, index) => {
+          return (
+            <Checkbox key={index} handleCheck={handleCheckOpen} {...time} />
+          );
+        })}
+      </ul>
+      <button onClick={() => filterMarkets(markets, filters, setMarkets)}>
+        Save
+      </button>
     </div>
   );
 };

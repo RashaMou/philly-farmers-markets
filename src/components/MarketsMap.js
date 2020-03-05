@@ -6,13 +6,14 @@ import {
   InfoWindow
 } from 'react-google-maps';
 import LocationContext from '../contexts/LocationContext';
+import getMarkets from '../helpers/getMarkets';
 
 const MarketsMap = () => {
-  const { getMarkets, markets } = useContext(LocationContext);
+  const { markets, setMarkets } = useContext(LocationContext);
   const [selectedMarket, setSelectedMarket] = useState(null);
 
   useEffect(() => {
-    getMarkets();
+    getMarkets(setMarkets);
   }, []);
 
   return (
@@ -20,10 +21,10 @@ const MarketsMap = () => {
       defaultZoom={14}
       defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
     >
-      {markets.map(market => {
+      {markets.map((market, index) => {
         return (
           <Marker
-            key={market.attributes.OBJECTID}
+            key={index}
             position={{ lat: market.geometry.y, lng: market.geometry.x }}
             onClick={() => {
               setSelectedMarket(market);

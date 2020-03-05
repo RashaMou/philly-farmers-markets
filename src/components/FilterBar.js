@@ -15,7 +15,6 @@ const FilterBar = () => {
         sidebar={
           <div>
             <Filters />
-            <h1 onClick={() => setSidebarOpen(false)}>X</h1>
           </div>
         }
         open={sidebarOpen}
