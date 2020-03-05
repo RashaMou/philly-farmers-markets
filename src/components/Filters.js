@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Checkbox from './Checkbox';
 import LocationContext from '../contexts/LocationContext';
 import filterMarkets from '../helpers/filterMarkets';
@@ -9,6 +9,11 @@ const Filters = props => {
   const { setFilters, filters, markets, setMarkets } = useContext(
     LocationContext
   );
+
+  useEffect(() => {
+    // if nothing is selected and we click save, then get all markets
+  }, []);
+
   const [checkboxValues, setCheckboxValues] = useState({
     neighborhoods: [
       { value: 'West', isChecked: false },
@@ -97,6 +102,7 @@ const Filters = props => {
     filterMarkets(markets, filters, setMarkets);
     props.setSidebarOpen(false);
   };
+
   const resetFilters = event => {
     props.setSidebarOpen(false);
     getMarkets(setMarkets);

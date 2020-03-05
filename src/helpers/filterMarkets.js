@@ -3,7 +3,7 @@ const filterMarkets = (markets, filters, cb) => {
 
   let filteredMarkets = [];
 
-  markets.map(market => {
+  markets.forEach(market => {
     const marketAttributes = Object.values(market.attributes);
     allFilters.forEach(filter => {
       if (marketAttributes.includes(filter)) {
