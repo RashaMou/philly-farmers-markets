@@ -3,6 +3,7 @@ import Checkbox from './Checkbox';
 import LocationContext from '../contexts/LocationContext';
 import filterMarkets from '../helpers/filterMarkets';
 import getMarkets from '../helpers/getMarkets';
+import { dayOfTheWeek } from '../helpers/dates';
 
 const Filters = () => {
   const { setFilters, filters, markets, setMarkets } = useContext(
@@ -86,8 +87,10 @@ const Filters = () => {
       return value.value;
     });
 
-    // console.log(checkedOpen);
-    setFilters({ ...filters, checkedOpen });
+    if (checkedOpen.includes('Open today')) {
+      let today = dayOfTheWeek();
+      setFilters({ ...filters, today });
+    }
   };
 
   const resetFilters = event => {
