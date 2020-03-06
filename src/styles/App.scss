@@ -1,0 +1,50 @@
+.app-container {
+  display: flex;
+}
+
+.info-modal {
+  width: 30%;
+  height: 300px;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border: 1px solid;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 10000000;
+
+  .close-button {
+    text-align: right;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: orange !important;
+    font-weight: bold;
+
+    &:visited {
+      color: #41da83;
+    }
+  }
+
+  .message-header {
+    background-color: orange;
+    color: #3d4954;
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .fa-react {
+    color: #00d8ff;
+  }
+}

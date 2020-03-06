@@ -1,0 +1,62 @@
+.filters-menu-title {
+  color: #3d4954;
+  margin-left: 1%;
+  margin-top: 3rem;
+  color: #3d4954;
+  font-size: 1.5rem;
+  width: 100px;
+  font-family: 'Fjalla One', sans-serif;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filters-header {
+  height: 150px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    color: #3d4954;
+    font-size: 1.5rem;
+    font-family: 'Fjalla One', sans-serif;
+  }
+}
+
+.filters-info {
+  padding: 7%;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  margin-bottom: 5px;
+  color: #3d4954;
+}
+
+.filter-group-header-container {
+  border-bottom: 2px solid orange;
+  margin-bottom: 10px;
+
+  .is-5 {
+    padding-bottom: 6px;
+  }
+}
+
+.buttons {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-evenly;
+
+  .save {
+    background-color: #41da83;
+  }
+
+  .reset {
+    background-color: orange;
+  }
+}

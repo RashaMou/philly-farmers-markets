@@ -1,0 +1,27 @@
+.header,
+.footer {
+  padding: 15px 0 15px 0;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 300px;
+}
+
+.far {
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  color: #3d4954;
+}
+
+.question-container {
+  align-self: end;
+  &:hover {
+    cursor: pointer;
+  }
+  position: relative;
+  z-index: 1000;
+}
