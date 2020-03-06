@@ -21,7 +21,7 @@ const FilterBar = () => {
         }
         open={sidebarOpen}
         onSetOpen={onSetSidebarOpen}
-        styles={{ sidebar: { background: 'white', width: 350 } }}
+        styles={{ sidebar: { background: 'white', width: 360 } }}
       >
         <h2
           className='filters-menu-title'

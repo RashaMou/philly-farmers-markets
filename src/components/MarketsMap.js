@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   GoogleMap,
   withGoogleMap,
@@ -17,6 +17,13 @@ const MarketsMap = () => {
     setSelectedMarket
   } = useContext(LocationContext);
 
+  const mapOptions = {
+    fullscreenControl: false,
+    mapTypeControl: false
+  };
+
+  const [center, setCenter] = useState({ lat: 39.952583, lng: -75.165222 });
+
   useEffect(() => {
     getMarkets(setMasterMarketsArray, setFilteredMarkets);
   }, []);
@@ -24,9 +31,9 @@ const MarketsMap = () => {
   return (
     <GoogleMap
       defaultZoom={13}
-      defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
+      center={center}
       onClick={() => setSelectedMarket(null)}
-      defaultOptions={{ mapTypeControl: false }}
+      options={mapOptions}
     >
       {filteredMarkets.map((market, index) => {
         return (
@@ -35,6 +42,7 @@ const MarketsMap = () => {
             position={{ lat: market.geometry.y, lng: market.geometry.x }}
             onClick={() => {
               setSelectedMarket(market);
+              setCenter({ lat: market.geometry.y, lng: market.geometry.x });
             }}
             icon={{
               url: require('../assets/marker3.png'),
