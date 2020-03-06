@@ -21,13 +21,10 @@ const filterMarkets = (markets, filters, cb) => {
     });
   }
 
-  console.log('filteredByOpen before if', filteredByOpen);
-
   // if filter by open today is empty, fill it with original markets array
   if (filteredByOpen.length === 0) {
     filteredByOpen = [...markets];
   }
-  console.log('filteredByOpen after if', filteredByOpen);
 
   // filter by neighborhood
   filteredByOpen.forEach(market => {
@@ -39,14 +36,10 @@ const filterMarkets = (markets, filters, cb) => {
     });
   });
 
-  console.log('filteredByNeighborhood before if', filteredByNeighborhood);
-
   // if no filters by neighborhood present, add all the markets to the filteredByNeighborhood array
   if (filteredByNeighborhood.length === 0) {
-    filteredByNeighborhood = [...markets];
+    filteredByNeighborhood = [...filteredByOpen];
   }
-
-  console.log('filteredByNeighborhood after if', filteredByNeighborhood);
 
   // filter filteredByNeighborhood array by food assistance
   filteredByNeighborhood.forEach(market => {
@@ -68,11 +61,6 @@ const filterMarkets = (markets, filters, cb) => {
       }
     });
   });
-
-  console.log(
-    'neighborhoodsFilteredByFoodAssistance',
-    neighborhoodsFilteredByFoodAssistance
-  );
 
   if (neighborhoodsFilteredByFoodAssistance.length === 0) {
     cb(filteredByNeighborhood);
