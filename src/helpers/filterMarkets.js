@@ -1,22 +1,23 @@
 const filterMarkets = (markets, filters, cb) => {
+  console.log('markets', markets);
+  console.log('filters', filters);
+  console.log('cb', cb);
   const allFilters = Object.values(filters).flat();
-  console.log('a;;Filters', allFilters);
 
-  let filteredMarkets = [];
+  let filteredMarketsArray = [];
 
   markets.forEach(market => {
-    const marketAttributes = Object.values(market.attributes);
-    // console.log('marketAttributes', marketAttributes);
+    const marketAttributes = Object.values(market.attributes); // array
     allFilters.forEach(filter => {
+      console.log('each filter', filter);
       if (marketAttributes.includes(filter)) {
-        filteredMarkets.push(market);
+        filteredMarketsArray.push(market);
         console.log('market', market);
       }
     });
   });
 
-  console.log('filteredMarkets', filteredMarkets);
-  cb(filteredMarkets);
+  cb(filteredMarketsArray);
 };
 
 export default filterMarkets;

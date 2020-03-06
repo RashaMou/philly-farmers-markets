@@ -1,13 +1,15 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import { filterReducer, initialState } from '../reducers/filterReducer';
 import filterMarkets from '../helpers/filterMarkets';
+import LocationContext from '../contexts/LocationContext';
 
 const Filters = () => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
-  console.log('state', state);
-
-  const handleCheck = (id, name) => {
-    dispatch({ type: 'check', payload: { id, name } });
+  const { masterMarketsArray, setFilteredMarkets } = useContext(
+    LocationContext
+  );
+  const handleCheck = (id, data) => {
+    dispatch({ type: 'check', payload: { id, data } });
   };
 
   return (
@@ -27,9 +29,9 @@ const Filters = () => {
                   className='checkbox'
                   type='checkbox'
                   id={checkbox.name}
-                  name={checkbox.data}
+                  name={checkbox.name}
                   checked={state.checkboxes[checkbox.id - 1].isChecked}
-                  onChange={() => handleCheck(checkbox.id, checkbox.name)}
+                  onChange={() => handleCheck(checkbox.id, checkbox.data)}
                 />
                 <label htmlFor={checkbox.name}>{checkbox.name}</label>
               </li>
@@ -37,7 +39,16 @@ const Filters = () => {
           })}
         </ul>
         <div className='buttons'>
-          <button className='button save' onClick={filterMarkets}>
+          <button
+            className='button save'
+            onClick={() =>
+              filterMarkets(
+                masterMarketsArray,
+                state.filters,
+                setFilteredMarkets
+              )
+            }
+          >
             Save
           </button>
           <button className='button reset'>Reset Filters</button>
