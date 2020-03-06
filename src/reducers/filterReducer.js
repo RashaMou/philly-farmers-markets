@@ -85,12 +85,12 @@ export const filterReducer = (state, action) => {
         filters: []
       };
 
-    case 'openCheck':
-      return {
-        ...state,
-        open: !state.open,
-        filters: [...state.filters, 'openToday']
-      };
+    // case 'openCheck':
+    //   return {
+    //     ...state,
+    //     open: !state.open,
+    //     filters: [...state.filters, 'openToday']
+    //   };
 
     default:
       return state;
