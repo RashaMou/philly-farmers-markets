@@ -23,7 +23,7 @@ const MarketsMap = () => {
 
   return (
     <GoogleMap
-      defaultZoom={14}
+      defaultZoom={13}
       defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
       onClick={() => setSelectedMarket(null)}
       defaultOptions={{ mapTypeControl: false }}

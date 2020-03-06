@@ -8,8 +8,14 @@ const Filters = () => {
   const { masterMarketsArray, setFilteredMarkets } = useContext(
     LocationContext
   );
+
   const handleCheck = (id, data) => {
     dispatch({ type: 'check', payload: { id, data } });
+  };
+
+  const resetFilters = () => {
+    setFilteredMarkets(masterMarketsArray);
+    dispatch({ type: 'uncheckAll' });
   };
 
   return (
@@ -18,26 +24,52 @@ const Filters = () => {
         <h2>Filter Markets By:</h2>
       </div>
       <div className='filters-info'>
-        <div className='filter-group-header-container'>
-          <h2 className='title is-5'>Neighborhoods</h2>
+        <div className='filter-group'>
+          <div className='filter-group-header-container'>
+            <h2 className='title is-5'>Neighborhoods</h2>
+          </div>
+          <ul className='filter-group-list'>
+            {state.neighborhoods.map((neighborhood, index) => {
+              return (
+                <li key={index}>
+                  <input
+                    className='checkbox'
+                    type='checkbox'
+                    id={neighborhood.name}
+                    name={neighborhood.name}
+                    checked={state.neighborhoods[neighborhood.id - 1].isChecked}
+                    onChange={() =>
+                      handleCheck(neighborhood.id, neighborhood.data)
+                    }
+                  />
+                  <label htmlFor={neighborhood.name}>{neighborhood.name}</label>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className='filter-group'>
-          {state.checkboxes.map(checkbox => {
-            return (
-              <li key={checkbox.id}>
-                <input
-                  className='checkbox'
-                  type='checkbox'
-                  id={checkbox.name}
-                  name={checkbox.name}
-                  checked={state.checkboxes[checkbox.id - 1].isChecked}
-                  onChange={() => handleCheck(checkbox.id, checkbox.data)}
-                />
-                <label htmlFor={checkbox.name}>{checkbox.name}</label>
-              </li>
-            );
-          })}
-        </ul>
+        <div className='filter-group'>
+          <div className='filter-group-header-container'>
+            <h2 className='title is-5'>Food Assistance</h2>
+          </div>
+          <ul className='filter-group-list'>
+            {state.foodAssistance.map((program, index) => {
+              return (
+                <li key={index}>
+                  <input
+                    className='checkbox'
+                    type='checkbox'
+                    id={program.name}
+                    name={program.name}
+                    checked={state.foodAssistance[program.id - 11].isChecked}
+                    onChange={() => handleCheck(program.id, program.data)}
+                  />
+                  <label htmlFor={program.name}>{program.name}</label>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
         <div className='buttons'>
           <button
             className='button save'
@@ -51,7 +83,9 @@ const Filters = () => {
           >
             Save
           </button>
-          <button className='button reset'>Reset Filters</button>
+          <button className='button reset' onClick={resetFilters}>
+            Reset Filters
+          </button>
         </div>
       </div>
     </div>

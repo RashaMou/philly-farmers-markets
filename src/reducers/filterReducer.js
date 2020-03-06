@@ -1,5 +1,5 @@
 export const initialState = {
-  checkboxes: [
+  neighborhoods: [
     { id: 1, name: 'West Philly', data: 'West', isChecked: false },
     { id: 2, name: 'South Philly', data: 'South', isChecked: false },
     { id: 3, name: 'Center City', data: 'Center City', isChecked: false },
@@ -36,26 +36,52 @@ export const initialState = {
       isChecked: false
     }
   ],
+  foodAssistance: [
+    { id: 11, name: 'SNAP', data: 'ACCEPT_SNAP_ACCESS', isChecked: false },
+    {
+      id: 12,
+      name: 'Philly Food Bucks',
+      data: 'ACCEPT_PHILLY_FOOD_BUCKS_',
+      isChecked: false
+    },
+    {
+      id: 13,
+      name: "Farmer's Market Nutrition Program",
+      data: 'ACCEPT_FMNP',
+      isChecked: false
+    }
+  ],
   filters: []
 };
 
 export const filterReducer = (state, action) => {
   switch (action.type) {
     case 'check':
-      console.log('action.payload.data', action.payload.data);
       return {
         ...state,
-        checkboxes: state.checkboxes.map(checkbox => {
-          if (checkbox.id === action.payload.id) {
-            return { ...checkbox, isChecked: !checkbox.isChecked };
-          } else return { ...checkbox };
+        neighborhoods: state.neighborhoods.map(neighborhood => {
+          if (neighborhood.id === action.payload.id) {
+            return { ...neighborhood, isChecked: !neighborhood.isChecked };
+          } else return { ...neighborhood };
+        }),
+        foodAssistance: state.foodAssistance.map(program => {
+          if (program.id === action.payload.id) {
+            return { ...program, isChecked: !program.isChecked };
+          } else return { ...program };
         }),
         filters: [...state.filters, action.payload.data]
       };
 
-    case 'add filter':
+    case 'uncheckAll':
       return {
-        ...state
+        ...state,
+        neighborhoods: state.neighborhoods.map(neighborhood => {
+          return { ...neighborhood, isChecked: false };
+        }),
+        foodAssistance: state.foodAssistance.map(program => {
+          return { ...program, isChecked: false };
+        }),
+        filters: []
       };
     default:
       return state;
