@@ -51,6 +51,7 @@ export const initialState = {
       isChecked: false
     }
   ],
+  openToday: false,
   filters: []
 };
 
@@ -83,6 +84,14 @@ export const filterReducer = (state, action) => {
         }),
         filters: []
       };
+
+    case 'openCheck':
+      return {
+        ...state,
+        open: !state.open,
+        filters: [...state.filters, 'openToday']
+      };
+
     default:
       return state;
   }
