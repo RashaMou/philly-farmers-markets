@@ -4,8 +4,7 @@
 2. Filter by months
 3. add filter tags
 4. refactor to use useReducer.
-5. Fix sidebar styling
-6. Fix broken day filters
+5. Fix broken day filters
 
 ### Master Market Array
 

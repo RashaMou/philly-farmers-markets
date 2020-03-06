@@ -9,12 +9,16 @@ import LocationContext from '../contexts/LocationContext';
 import getMarkets from '../helpers/getMarkets';
 
 const MarketsMap = () => {
-  const { markets, setMarkets, selectedMarket, setSelectedMarket } = useContext(
-    LocationContext
-  );
+  const {
+    setMasterMarketsArray,
+    setFilteredMarkets,
+    filteredMarkets,
+    selectedMarket,
+    setSelectedMarket
+  } = useContext(LocationContext);
 
   useEffect(() => {
-    getMarkets(setMarkets);
+    getMarkets(setMasterMarketsArray, setFilteredMarkets);
   }, []);
 
   return (
@@ -24,7 +28,7 @@ const MarketsMap = () => {
       onClick={() => setSelectedMarket(null)}
       defaultOptions={{ mapTypeControl: false }}
     >
-      {markets.map((market, index) => {
+      {filteredMarkets.map((market, index) => {
         return (
           <Marker
             key={index}
