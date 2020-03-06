@@ -1,17 +1,51 @@
 const filterMarkets = (markets, filters, cb) => {
-  const allFilters = Object.values(filters).flat();
+  // console.log('filters', filters);
 
-  let filteredMarkets = [];
+  // let filteredMarketsArray = [];
+
+  // markets.forEach(market => {
+  //   const marketAttributes = Object.values(market.attributes); // array
+  //   filters.forEach(filter => {
+  //     if (marketAttributes.includes(filter)) {
+  //       filteredMarketsArray.push(market);
+  //     }
+  //   });
+  // });
+
+  let filteredMarketsArray = [];
 
   markets.forEach(market => {
     const marketAttributes = Object.values(market.attributes);
-    allFilters.forEach(filter => {
+    filters.forEach(filter => {
       if (marketAttributes.includes(filter)) {
-        filteredMarkets.push(market);
-      } else return markets;
+        filteredMarketsArray.push(market);
+      }
+      if (
+        (filter === 'ACCEPT_FMNP') &
+        (market.attributes.ACCEPT_FMNP === 'Y')
+      ) {
+        filteredMarketsArray.push(market);
+      }
+      if (
+        (filter === 'ACCEPT_SNAP_ACCESS') &
+        (market.attributes.ACCEPT_SNAP_ACCESS === 'Y')
+      ) {
+        filteredMarketsArray.push(market);
+      }
+      if (
+        (filter === 'ACCEPT_PHILLY_FOOD_BUCKS_') &
+        (market.attributes.ACCEPT_PHILLY_FOOD_BUCKS_ === 'Y')
+      ) {
+        filteredMarketsArray.push(market);
+      }
     });
+    return filteredMarketsArray;
   });
-  cb(filteredMarkets);
+
+  // removes duplicates
+  let unique = [...new Set(filteredMarketsArray)];
+
+  cb(unique);
 };
 
 export default filterMarkets;

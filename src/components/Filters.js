@@ -1,132 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Checkbox from './Checkbox';
-import LocationContext from '../contexts/LocationContext';
+import React, { useReducer, useContext } from 'react';
+import { filterReducer, initialState } from '../reducers/filterReducer';
 import filterMarkets from '../helpers/filterMarkets';
-import getMarkets from '../helpers/getMarkets';
-import { dayOfTheWeek } from '../helpers/dates';
+import LocationContext from '../contexts/LocationContext';
 
-const Filters = props => {
-  const { setFilters, filters, markets, setMarkets } = useContext(
+const Filters = () => {
+  const [state, dispatch] = useReducer(filterReducer, initialState);
+  const { masterMarketsArray, setFilteredMarkets } = useContext(
     LocationContext
   );
 
-  useEffect(() => {
-    // if nothing is selected and we click save, then get all markets
-  }, []);
-
-  const [checkboxValues, setCheckboxValues] = useState({
-    neighborhoods: [
-      { value: 'West', isChecked: false },
-      { value: 'South', isChecked: false },
-      { value: 'Center City', isChecked: false },
-      { value: 'Southwest', isChecked: false },
-      { value: 'Bridesburg/Kensington/Port Richmond', isChecked: false },
-      { value: 'Northeast', isChecked: false },
-      { value: 'Germantown/ Chestnut Hill', isChecked: false },
-      { value: 'Roxborough/ Manayunk', isChecked: false },
-      { value: 'North', isChecked: false },
-      { value: 'Northwest', isChecked: false }
-    ],
-    foodAssistance: [
-      { value: 'SNAP', isChecked: false },
-      { value: 'Philly Food Bucks', isChecked: false },
-      { value: 'Farmers Market Nutrition Program', isChecked: false }
-    ],
-    open: [
-      {
-        value: 'Open this month',
-        isChecked: false
-      },
-      {
-        value: 'Open today',
-        isChecked: false
-      }
-    ]
-  });
-
-  const handleCheckNeighborhoods = event => {
-    let neighborhoods = checkboxValues.neighborhoods;
-    neighborhoods.forEach(neighborhood => {
-      if (neighborhood.value === event.target.value)
-        neighborhood.isChecked = event.target.checked;
-    });
-    setCheckboxValues({ ...checkboxValues, neighborhoods: neighborhoods });
-    const checkedValues = neighborhoods.filter(neighborhood => {
-      return neighborhood.isChecked === true;
-    });
-    const checkedNeighborhoods = checkedValues.map(value => {
-      return value.value;
-    });
-    setFilters({ ...filters, checkedNeighborhoods });
+  const handleCheck = (id, data) => {
+    dispatch({ type: 'check', payload: { id, data } });
   };
 
-  const handleCheckFoodAssistance = event => {
-    let foodAssistance = checkboxValues.foodAssistance;
-    foodAssistance.forEach(program => {
-      if (program.value === event.target.value)
-        program.isChecked = event.target.checked;
-    });
-    setCheckboxValues({ ...checkboxValues, foodAssistance: foodAssistance });
-    const checkedValues = foodAssistance.filter(program => {
-      return program.isChecked === true;
-    });
-    const checkedFoodAssistance = checkedValues.map(value => {
-      return value.value;
-    });
-
-    // console.log(checkedFoodAssistance);
-    setFilters({ ...filters, checkedFoodAssistance });
-  };
-
-  const handleCheckOpen = event => {
-    let open = checkboxValues.open;
-    // goes through each property in checkboxValues.open and checks if that is the one that is checked
-    open.forEach(time => {
-      if (time.value === event.target.value)
-        time.isChecked = event.target.checked;
-    });
-    setCheckboxValues({ ...checkboxValues, open: open });
-
-    // returns an array of only the ones that are true
-    const checkedOpen = open
-      .filter(time => {
-        return time.isChecked === true;
-      })
-      .map(value => {
-        return value.value;
-      });
-
-    console.log('checkedOpen', checkedOpen);
-
-    if (checkedOpen.includes('Open today')) {
-      let today = dayOfTheWeek();
-      setFilters({ ...filters, today });
-    }
-  };
-
-  const saveFilters = () => {
-    filterMarkets(markets, filters, setMarkets);
-    props.setSidebarOpen(false);
-  };
-
-  const resetFilters = event => {
-    props.setSidebarOpen(false);
-    getMarkets(setMarkets);
-    let neighborhoods = checkboxValues.neighborhoods;
-    neighborhoods.forEach(
-      neighborhood => (neighborhood.isChecked = event.target.checked)
-    );
-    setCheckboxValues({ ...checkboxValues, neighborhoods: neighborhoods });
-
-    let foodAssistance = checkboxValues.foodAssistance;
-    foodAssistance.forEach(
-      program => (program.isChecked = event.target.checked)
-    );
-    setCheckboxValues({ ...checkboxValues, foodAssistance: foodAssistance });
-
-    let open = checkboxValues.open;
-    open.forEach(time => (time.isChecked = event.target.checked));
-    setCheckboxValues({ ...checkboxValues, open: open });
+  const resetFilters = () => {
+    setFilteredMarkets(masterMarketsArray);
+    dispatch({ type: 'uncheckAll' });
   };
 
   return (
@@ -135,46 +24,63 @@ const Filters = props => {
         <h2>Filter Markets By:</h2>
       </div>
       <div className='filters-info'>
-        <div className='filter-group-header-container'>
-          <h2 className='title is-5'>Neighborhoods</h2>
+        <div className='filter-group'>
+          <div className='filter-group-header-container'>
+            <h2 className='title is-5'>Neighborhoods</h2>
+          </div>
+          <ul className='filter-group-list'>
+            {state.neighborhoods.map((neighborhood, index) => {
+              return (
+                <li key={index}>
+                  <input
+                    className='checkbox'
+                    type='checkbox'
+                    id={neighborhood.name}
+                    name={neighborhood.name}
+                    checked={state.neighborhoods[neighborhood.id - 1].isChecked}
+                    onChange={() =>
+                      handleCheck(neighborhood.id, neighborhood.data)
+                    }
+                  />
+                  <label htmlFor={neighborhood.name}>{neighborhood.name}</label>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className='filter-group'>
-          {checkboxValues.neighborhoods.map((neighborhood, index) => {
-            return (
-              <Checkbox
-                key={index}
-                handleCheck={handleCheckNeighborhoods}
-                {...neighborhood}
-              />
-            );
-          })}
-        </ul>
-        <div className='filter-group-header-container'>
-          <h2 className='title is-5'>Food Assistance Programs</h2>
+        <div className='filter-group'>
+          <div className='filter-group-header-container'>
+            <h2 className='title is-5'>Food Assistance</h2>
+          </div>
+          <ul className='filter-group-list'>
+            {state.foodAssistance.map((program, index) => {
+              return (
+                <li key={index}>
+                  <input
+                    className='checkbox'
+                    type='checkbox'
+                    id={program.name}
+                    name={program.name}
+                    checked={state.foodAssistance[program.id - 11].isChecked}
+                    onChange={() => handleCheck(program.id, program.data)}
+                  />
+                  <label htmlFor={program.name}>{program.name}</label>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className='filter-group'>
-          {checkboxValues.foodAssistance.map((program, index) => {
-            return (
-              <Checkbox
-                key={index}
-                handleCheck={handleCheckFoodAssistance}
-                {...program}
-              />
-            );
-          })}
-        </ul>
-        <div className='filter-group-header-container'>
-          <h2 className='title is-5'>Open</h2>
-        </div>
-        <ul className='filter-group'>
-          {checkboxValues.open.map((time, index) => {
-            return (
-              <Checkbox key={index} handleCheck={handleCheckOpen} {...time} />
-            );
-          })}
-        </ul>
         <div className='buttons'>
-          <button className='button save' onClick={saveFilters}>
+          <button
+            className='button save'
+            onClick={() =>
+              filterMarkets(
+                masterMarketsArray,
+                state.filters,
+                setFilteredMarkets
+              )
+            }
+          >
             Save
           </button>
           <button className='button reset' onClick={resetFilters}>

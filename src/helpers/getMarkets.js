@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 
-const getMarkets = cb => {
+const getMarkets = (cb1, cb2) => {
   axios({
     method: 'post',
     url:
@@ -18,7 +18,8 @@ const getMarkets = cb => {
   })
     .then(res => {
       console.log('res', res.data.features);
-      cb(res.data.features);
+      cb1(res.data.features);
+      cb2(res.data.features);
     })
     .catch(err => {
       console.log(err);
