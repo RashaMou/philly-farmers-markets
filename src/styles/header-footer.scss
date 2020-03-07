@@ -2,26 +2,36 @@
 .footer {
   padding: 15px 0 15px 0;
   background-color: orange;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.logo-container {
+  grid-column-start: 2;
+  // justify-self: center;
+  align-self: end;
 }
 
 .logo {
   width: 300px;
 }
 
-.far {
-  margin-right: 2rem;
-  font-size: 1.5rem;
-  color: #3d4954;
-}
-
 .question-container {
+  grid-column-start: 3;
+  justify-self: end;
   align-self: end;
   &:hover {
     cursor: pointer;
   }
   position: relative;
   z-index: 1000;
+
+  .far {
+    margin-right: 2rem;
+    font-size: 1.5rem;
+    color: #3d4954;
+  }
 }
