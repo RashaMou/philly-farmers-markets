@@ -3,7 +3,7 @@ import { filterReducer, initialState } from '../reducers/filterReducer';
 import filterMarkets from '../helpers/filterMarkets';
 import LocationContext from '../contexts/LocationContext';
 
-const Filters = () => {
+const Filters = props => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   const { masterMarketsArray, setFilteredMarkets } = useContext(
     LocationContext
@@ -26,6 +26,10 @@ const Filters = () => {
     <div>
       <div className='filters-header'>
         <h2>Filter Markets By:</h2>
+        <button
+          class='delete'
+          onClick={() => props.setSidebarOpen(false)}
+        ></button>
       </div>
       <div className='filters-info'>
         <div className='filter-group'>

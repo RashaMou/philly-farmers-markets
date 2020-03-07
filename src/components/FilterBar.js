@@ -21,7 +21,7 @@ const FilterBar = () => {
         }
         open={sidebarOpen}
         onSetOpen={onSetSidebarOpen}
-        styles={{ sidebar: { background: 'white', width: 360 } }}
+        styles={{ sidebar: { background: 'white', width: 370, zIndex: 200 } }}
       >
         <h2
           className='filters-menu-title'
@@ -29,6 +29,12 @@ const FilterBar = () => {
         >
           Filters >>
         </h2>
+        <div
+          className='filter-icon'
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <i class='fas fa-filter'></i>
+        </div>
       </Sidebar>
     </div>
   );

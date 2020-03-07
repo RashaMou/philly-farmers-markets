@@ -1,5 +1,7 @@
-.app-container {
-  display: flex;
+body {
+  @media (min-width: $breakpoint-phablet) {
+    font-size: 13px;
+  }
 }
 
 .info-modal {
@@ -36,15 +38,26 @@
     background-color: orange;
     color: #3d4954;
     font-size: 1.2rem;
+    @media (min-width: $breakpoint-iphone) {
+      font-size: 1rem;
+    }
   }
 
   p {
     font-size: 1.2rem;
     line-height: 2rem;
     margin-top: 1.5rem;
+
+    @media (min-width: $breakpoint-iphone) {
+      font-size: 0.9rem;
+    }
   }
 
   .fa-react {
     color: #00d8ff;
+  }
+
+  @media (min-width: $breakpoint-iphone) {
+    width: 300px;
   }
 }

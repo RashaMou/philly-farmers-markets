@@ -11,8 +11,11 @@
 
 .logo-container {
   grid-column-start: 2;
-  // justify-self: center;
+  justify-self: center;
   align-self: end;
+  @media (max-width: $breakpoint-iphone) {
+    width: 150px;
+  }
 }
 
 .logo {
@@ -27,11 +30,19 @@
     cursor: pointer;
   }
   position: relative;
-  z-index: 1000;
+  z-index: 100;
 
   .far {
     margin-right: 2rem;
     font-size: 1.5rem;
     color: #3d4954;
+
+    @media (max-width: $breakpoint-phablet) {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: $breakpoint-iphone) {
+      font-size: 1rem;
+    }
   }
 }
