@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   GoogleMap,
   withGoogleMap,
@@ -17,6 +17,20 @@ const MarketsMap = () => {
     setSelectedMarket
   } = useContext(LocationContext);
 
+  const options = {
+    fullscreenControl: false,
+    mapTypeControl: false
+  };
+
+  const infoWindowOptions = {
+    pixelOffset: new window.google.maps.Size(20, 20)
+  };
+
+  const [mapCenter, setMapCenter] = useState({
+    lat: 39.952583,
+    lng: -75.165222
+  });
+
   useEffect(() => {
     getMarkets(setMasterMarketsArray, setFilteredMarkets);
   }, []);
@@ -24,9 +38,9 @@ const MarketsMap = () => {
   return (
     <GoogleMap
       defaultZoom={13}
-      defaultCenter={{ lat: 39.952583, lng: -75.165222 }}
+      center={mapCenter}
       onClick={() => setSelectedMarket(null)}
-      defaultOptions={{ mapTypeControl: false }}
+      options={options}
     >
       {filteredMarkets.map((market, index) => {
         return (
@@ -35,6 +49,7 @@ const MarketsMap = () => {
             position={{ lat: market.geometry.y, lng: market.geometry.x }}
             onClick={() => {
               setSelectedMarket(market);
+              setMapCenter({ lat: market.geometry.y, lng: market.geometry.x });
             }}
             icon={{
               url: require('../assets/marker3.png'),
@@ -52,6 +67,7 @@ const MarketsMap = () => {
           onCloseClick={() => {
             setSelectedMarket(null);
           }}
+          options={{ pixelOffset: new window.google.maps.Size(0, -62) }}
         >
           <div className='infobox'>
             <h2 className='title is-5'>{selectedMarket.attributes.NAME}</h2>
