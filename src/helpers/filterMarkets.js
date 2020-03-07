@@ -1,28 +1,48 @@
 const filterMarkets = (markets, filters, cb) => {
+  console.log('filters', filters);
+  console.log('markets', markets);
+  let filteredByOpen = [];
   let filteredByNeighborhood = [];
   let neighborhoodsFilteredByFoodAssistance = [];
 
-  // filter by neighborhoods
-  markets.forEach(market => {
+  // filter by open today
+  if (filters.some(item => item.day)) {
+    // get name of the day
+    let day = '';
+    filters.forEach(item => {
+      day = item.day;
+    });
+
+    //look for name of day as substring in market.attributes.DAY
+    markets.forEach(market => {
+      if (market.attributes.DAY.includes(day)) {
+        filteredByOpen.push(market);
+      }
+    });
+  }
+
+  // if filter by open today is empty, fill it with original markets array
+  if (filteredByOpen.length === 0) {
+    filteredByOpen = [...markets];
+  }
+
+  // filter by neighborhood
+  filteredByOpen.forEach(market => {
     const marketAttributes = Object.values(market.attributes);
     filters.forEach(filter => {
       if (marketAttributes.includes(filter)) {
-        filteredByNeighborhood.push(market); // here we should have the markets filtered by neighborhood
+        filteredByNeighborhood.push(market);
       }
     });
   });
 
   // if no filters by neighborhood present, add all the markets to the filteredByNeighborhood array
   if (filteredByNeighborhood.length === 0) {
-    filteredByNeighborhood = [...markets];
+    filteredByNeighborhood = [...filteredByOpen];
   }
 
   // filter filteredByNeighborhood array by food assistance
   filteredByNeighborhood.forEach(market => {
-    console.log(
-      'market.attributes.ACCEPT_SNAP_ACCESS',
-      market.attributes.ACCEPT_SNAP_ACCESS
-    );
     filters.forEach(filter => {
       if (
         filter === 'ACCEPT_SNAP_ACCESS' &&
@@ -31,7 +51,6 @@ const filterMarkets = (markets, filters, cb) => {
         neighborhoodsFilteredByFoodAssistance.push(market);
       }
       if (filter === 'ACCEPT_FMNP' && market.attributes.ACCEPT_FMNP === 'Y') {
-        console.log('market fired', market);
         neighborhoodsFilteredByFoodAssistance.push(market);
       }
       if (
@@ -43,10 +62,9 @@ const filterMarkets = (markets, filters, cb) => {
     });
   });
 
-  // if no food assistance filters exist, then send the filteredByNeighborhood array to the cb, otherwise send the neighborhoodsFilteredByFoodAssistance array to the callback
-  if (neighborhoodsFilteredByFoodAssistance !== 0) {
-    cb(neighborhoodsFilteredByFoodAssistance);
-  } else cb(filteredByNeighborhood);
+  if (neighborhoodsFilteredByFoodAssistance.length === 0) {
+    cb(filteredByNeighborhood);
+  } else cb(neighborhoodsFilteredByFoodAssistance);
 };
 
 export default filterMarkets;

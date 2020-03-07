@@ -13,6 +13,10 @@ const Filters = () => {
     dispatch({ type: 'check', payload: { id, data } });
   };
 
+  const handleOpenCheck = () => {
+    dispatch({ type: 'openCheck' });
+  };
+
   const resetFilters = () => {
     setFilteredMarkets(masterMarketsArray);
     dispatch({ type: 'uncheckAll' });
@@ -68,6 +72,24 @@ const Filters = () => {
                 </li>
               );
             })}
+          </ul>
+        </div>
+        <div className='filter-group'>
+          <div className='filter-group-header-container'>
+            <h2 className='title is-5'>Open Today</h2>
+          </div>
+          <ul className='filter-group-list'>
+            <li>
+              <input
+                className='checkbox'
+                type='checkbox'
+                id='today'
+                name='today'
+                checked={state.open}
+                onChange={handleOpenCheck}
+              />
+              <label htmlFor='today'>Yes</label>
+            </li>
           </ul>
         </div>
         <div className='buttons'>

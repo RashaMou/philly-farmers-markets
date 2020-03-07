@@ -15,7 +15,9 @@ function App() {
   return (
     <div className='App'>
       <header className='header'>
-        <img className='logo' src={logo} alt='Logo' />
+        <div className='logo-container'>
+          <img className='logo' src={logo} alt='Logo' />
+        </div>
         <div className='question-container' onClick={modal}>
           <i onClick={modal} className='far fa-question-circle'></i>
         </div>

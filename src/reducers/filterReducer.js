@@ -1,3 +1,5 @@
+import { dayOfTheWeek } from '../helpers/dates';
+
 export const initialState = {
   neighborhoods: [
     { id: 1, name: 'West Philly', data: 'West', isChecked: false },
@@ -51,6 +53,7 @@ export const initialState = {
       isChecked: false
     }
   ],
+  openToday: false,
   filters: []
 };
 
@@ -81,8 +84,19 @@ export const filterReducer = (state, action) => {
         foodAssistance: state.foodAssistance.map(program => {
           return { ...program, isChecked: false };
         }),
+        open: false,
         filters: []
       };
+
+    case 'openCheck':
+      let day = dayOfTheWeek();
+
+      return {
+        ...state,
+        open: !state.open,
+        filters: [...state.filters, { day: day }]
+      };
+
     default:
       return state;
   }
