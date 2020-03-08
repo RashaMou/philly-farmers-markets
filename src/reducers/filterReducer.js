@@ -90,6 +90,7 @@ export const filterReducer = (state, action) => {
 
     case 'openCheck':
       let day = dayOfTheWeek();
+      console.log('day', day);
 
       return {
         ...state,
