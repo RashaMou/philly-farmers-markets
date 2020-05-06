@@ -2,6 +2,7 @@ export const dayOfTheWeek = () => {
   let day = new Date();
   const dayNumber = day.getDay();
   let today;
+  console.log('day from function', day);
 
   switch (dayNumber) {
     case 1:
@@ -22,7 +23,7 @@ export const dayOfTheWeek = () => {
     case 6:
       today = 'Sat';
       break;
-    case 7:
+    case 0:
       today = 'Sun';
       break;
     default:

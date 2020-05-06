@@ -11,12 +11,16 @@
 
 .logo-container {
   grid-column-start: 2;
-  // justify-self: center;
+  justify-self: center;
   align-self: end;
 }
 
 .logo {
   width: 300px;
+  @include breakpoint(mobile) {
+    margin-bottom: -20px;
+    max-width: 135%;
+  }
 }
 
 .question-container {
@@ -27,11 +31,18 @@
     cursor: pointer;
   }
   position: relative;
-  z-index: 1000;
+  z-index: 900;
+  @include breakpoint(mobile) {
+    margin-bottom: -8px;
+  }
+  z-index: 100;
 
   .far {
     margin-right: 2rem;
     font-size: 1.5rem;
     color: #3d4954;
+    @include breakpoint(mobile) {
+      font-size: 1.1rem;
+    }
   }
 }
