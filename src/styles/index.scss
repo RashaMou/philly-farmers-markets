@@ -1,9 +1,10 @@
 //General Styles
-@import 'reset';
-@import 'bulma';
-@import 'App';
+@import "reset";
+@import "bulma";
+@import "bits";
+@import "App";
 
 // Components
-@import 'header-footer';
-@import 'sidebar';
-@import 'map';
+@import "header-footer";
+@import "sidebar";
+@import "map";
