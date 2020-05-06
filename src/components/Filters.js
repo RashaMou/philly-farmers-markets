@@ -3,7 +3,7 @@ import { filterReducer, initialState } from "../reducers/filterReducer";
 import filterMarkets from "../helpers/filterMarkets";
 import LocationContext from "../contexts/LocationContext";
 
-const Filters = () => {
+const Filters = (props) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   const { masterMarketsArray, setFilteredMarkets } = useContext(
     LocationContext

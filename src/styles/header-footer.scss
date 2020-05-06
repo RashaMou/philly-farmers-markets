@@ -35,6 +35,7 @@
   @include breakpoint(mobile) {
     margin-bottom: -8px;
   }
+  z-index: 100;
 
   .far {
     margin-right: 2rem;
