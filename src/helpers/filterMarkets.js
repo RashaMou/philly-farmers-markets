@@ -1,6 +1,4 @@
 const filterMarkets = (markets, filters, cb) => {
-  console.log('filters', filters);
-  console.log('markets', markets);
   let filteredByOpen = [];
   let filteredByNeighborhood = [];
   let neighborhoodsFilteredByFoodAssistance = [];
