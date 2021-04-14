@@ -1,48 +1,57 @@
 .header,
 .footer {
-  padding: 15px 0 15px 0;
-  background-color: orange;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+    padding: 15px 0 15px 0;
+    background-color: orange;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
 
 .logo-container {
-  grid-column-start: 2;
-  justify-self: center;
-  align-self: end;
+    grid-column-start: 2;
+    justify-self: center;
+    align-self: end;
 }
 
 .logo {
-  width: 300px;
-  @include breakpoint(mobile) {
-    margin-bottom: -20px;
-    max-width: 135%;
-  }
+    width: 300px;
+    @include breakpoint(mobile) {
+        margin-bottom: -20px;
+        max-width: 135%;
+    }
 }
 
 .question-container {
-  grid-column-start: 3;
-  justify-self: end;
-  align-self: end;
-  &:hover {
-    cursor: pointer;
-  }
-  position: relative;
-  z-index: 900;
-  @include breakpoint(mobile) {
-    margin-bottom: -8px;
-  }
-  z-index: 100;
-
-  .far {
-    margin-right: 2rem;
-    font-size: 1.5rem;
-    color: #3d4954;
-    @include breakpoint(mobile) {
-      font-size: 1.1rem;
+    grid-column-start: 3;
+    justify-self: end;
+    align-self: end;
+    &:hover {
+        cursor: pointer;
     }
-  }
+    position: relative;
+    z-index: 900;
+    @include breakpoint(mobile) {
+        margin-bottom: -8px;
+    }
+    z-index: 100;
+
+    .far {
+        margin-right: 2rem;
+        font-size: 1.5rem;
+        color: #3d4954;
+        @include breakpoint(mobile) {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.fas {
+    font-size: 2.2rem;
+    margin-left: 20px;
+    margin-top: 80px;
+    &:hover {
+        cursor: pointer;
+    }
 }
