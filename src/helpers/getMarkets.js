@@ -1,27 +1,27 @@
-import axios from 'axios';
-import qs from 'qs';
+import axios from "axios";
+import qs from "qs";
 
 const getMarkets = (cb1, cb2) => {
   axios({
-    method: 'post',
-    url:
-      'https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/Farmers_Markets/FeatureServer/0/query',
+    method: "post",
+    url: "https://services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/Farmers_Markets/FeatureServer/0/query",
     data: qs.stringify({
-      f: 'json',
-      where: '1=1',
-      outSr: '4326',
-      outFields: '*'
+      f: "json",
+      where: "1=1",
+      outSr: "4326",
+      outFields: "*",
     }),
     headers: {
-      'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-    }
+      "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
   })
-    .then(res => {
-      console.log('res', res.data.features);
+    .then((res) => {
+      console.log("res", res.data.features);
+      // this sets both setMasterMarketsArray and setFilteredMarkets to the thingy.
       cb1(res.data.features);
       cb2(res.data.features);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };

@@ -14,7 +14,7 @@ const AboutModal = (props) => {
         <p>
           <span>Philly Farmer's Markets</span> was built by{" "}
           <a href="https://www.rasha.dev">Rasha Moumneh</a> using{" "}
-          <i class="fab fa-react"></i> React, Google Maps API, and{" "}
+          <i className="fab fa-react"></i> React, Google Maps API, and{" "}
           <a href="https://www.opendataphilly.org/">Open Data Philly's</a>{" "}
           farmer's markets ArcGIS API.
         </p>
