@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.scss';
-import App from './App';
-import GlobalState from './contexts/GlobalState';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/index.scss";
+import App from "./App";
+import { MarketStateProvider } from "./contexts/MarketsContext";
 
 ReactDOM.render(
-  <GlobalState>
+  <MarketStateProvider>
     <App />
-  </GlobalState>,
-  document.getElementById('root')
+  </MarketStateProvider>,
+  document.getElementById("root")
 );

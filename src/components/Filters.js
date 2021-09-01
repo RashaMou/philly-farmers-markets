@@ -1,142 +1,117 @@
-import React, { useContext, useReducer } from "react";
-import LocationContext from "../contexts/LocationContext";
-import filterMarkets from "../helpers/filterMarkets";
-import { filterReducer, initialState } from "../reducers/filterReducer";
+// import React, { useContext, useReducer } from "react";
+// import LocationContext from "../contexts/LocationContext";
+// import filterMarkets from "../utils/filterMarkets";
+// import { filterReducer, initialState } from "../reducers/filterReducer";
 
-const Filters = (props) => {
-    const [state, dispatch] = useReducer(filterReducer, initialState);
-    const { masterMarketsArray, setFilteredMarkets } = useContext(
-        LocationContext
-    );
+// const Filters = (props) => {
+//   const [state, dispatch] = useReducer(filterReducer, initialState);
+//   const { masterMarketsArray, setFilteredMarkets } =
+//     useContext(LocationContext);
 
-    const handleCheck = (id, data) => {
-        dispatch({ type: "check", payload: { id, data } });
-    };
+//   const handleCheck = (id, data) => {
+//     dispatch({ type: "check", payload: { id, data } });
+//   };
 
-    const handleOpenCheck = () => {
-        dispatch({ type: "openCheck" });
-    };
+//   const handleOpenCheck = () => {
+//     dispatch({ type: "openCheck" });
+//   };
 
-    const resetFilters = () => {
-        setFilteredMarkets(masterMarketsArray);
-        dispatch({ type: "uncheckAll" });
-    };
+//   const resetFilters = () => {
+//     setFilteredMarkets(masterMarketsArray);
+//     dispatch({ type: "uncheckAll" });
+//   };
 
-    return (
-        <div>
-            <div className="filters-header">
-                <h2>Filter Markets By:</h2>
-            </div>
-            <div className="filters-info">
-                <div className="filter-group">
-                    <div className="filter-group-header-container">
-                        <h2 className="title is-5 filter-name">
-                            Neighborhoods
-                        </h2>
-                    </div>
-                    <ul className="filter-group-list">
-                        {state.neighborhoods.map((neighborhood, index) => {
-                            return (
-                                <li key={index}>
-                                    <input
-                                        className="checkbox"
-                                        type="checkbox"
-                                        id={neighborhood.name}
-                                        name={neighborhood.name}
-                                        checked={
-                                            state.neighborhoods[
-                                                neighborhood.id - 1
-                                            ].isChecked
-                                        }
-                                        onChange={() =>
-                                            handleCheck(
-                                                neighborhood.id,
-                                                neighborhood.data
-                                            )
-                                        }
-                                    />
-                                    <label htmlFor={neighborhood.name}>
-                                        {neighborhood.name}
-                                    </label>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-                <div className="filter-group">
-                    <div className="filter-group-header-container">
-                        <h2 className="title is-5 filter-name">
-                            Food Assistance
-                        </h2>
-                    </div>
-                    <ul className="filter-group-list">
-                        {state.foodAssistance.map((program, index) => {
-                            return (
-                                <li key={index}>
-                                    <input
-                                        className="checkbox"
-                                        type="checkbox"
-                                        id={program.name}
-                                        name={program.name}
-                                        checked={
-                                            state.foodAssistance[
-                                                program.id - 11
-                                            ].isChecked
-                                        }
-                                        onChange={() =>
-                                            handleCheck(
-                                                program.id,
-                                                program.data
-                                            )
-                                        }
-                                    />
-                                    <label htmlFor={program.name}>
-                                        {program.name}
-                                    </label>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-                <div className="filter-group">
-                    <div className="filter-group-header-container">
-                        <h2 className="title is-5 filter-name">Open Today</h2>
-                    </div>
-                    <ul className="filter-group-list">
-                        <li>
-                            <input
-                                className="checkbox"
-                                type="checkbox"
-                                id="today"
-                                name="today"
-                                checked={state.open}
-                                onChange={handleOpenCheck}
-                            />
-                            <label htmlFor="today">Yes</label>
-                        </li>
-                    </ul>
-                </div>
-                <div className="buttons">
-                    <button
-                        className="button save"
-                        onClick={() => {
-                            filterMarkets(
-                                masterMarketsArray,
-                                state.filters,
-                                setFilteredMarkets
-                            );
-                            props.setSidebarOpen(false);
-                        }}
-                    >
-                        Save
-                    </button>
-                    <button className="button reset" onClick={resetFilters}>
-                        Reset Filters
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
+//   return (
+//     <div>
+//       <div className="filters-header">
+//         <h2>Filter Markets By:</h2>
+//       </div>
+//       <div className="filters-info">
+//         <div className="filter-group">
+//           <div className="filter-group-header-container">
+//             <h2 className="title is-5 filter-name">Neighborhoods</h2>
+//           </div>
+//           <ul className="filter-group-list">
+//             {state.neighborhoods.map((neighborhood, index) => {
+//               return (
+//                 <li key={index}>
+//                   <input
+//                     className="checkbox"
+//                     type="checkbox"
+//                     id={neighborhood.name}
+//                     name={neighborhood.name}
+//                     checked={state.neighborhoods[neighborhood.id - 1].isChecked}
+//                     onChange={() =>
+//                       handleCheck(neighborhood.id, neighborhood.data)
+//                     }
+//                   />
+//                   <label htmlFor={neighborhood.name}>{neighborhood.name}</label>
+//                 </li>
+//               );
+//             })}
+//           </ul>
+//         </div>
+//         <div className="filter-group">
+//           <div className="filter-group-header-container">
+//             <h2 className="title is-5 filter-name">Food Assistance</h2>
+//           </div>
+//           <ul className="filter-group-list">
+//             {state.foodAssistance.map((program, index) => {
+//               return (
+//                 <li key={index}>
+//                   <input
+//                     className="checkbox"
+//                     type="checkbox"
+//                     id={program.name}
+//                     name={program.name}
+//                     checked={state.foodAssistance[program.id - 11].isChecked}
+//                     onChange={() => handleCheck(program.id, program.data)}
+//                   />
+//                   <label htmlFor={program.name}>{program.name}</label>
+//                 </li>
+//               );
+//             })}
+//           </ul>
+//         </div>
+//         <div className="filter-group">
+//           <div className="filter-group-header-container">
+//             <h2 className="title is-5 filter-name">Open Today</h2>
+//           </div>
+//           <ul className="filter-group-list">
+//             <li>
+//               <input
+//                 className="checkbox"
+//                 type="checkbox"
+//                 id="today"
+//                 name="today"
+//                 checked={state.open}
+//                 onChange={handleOpenCheck}
+//               />
+//               <label htmlFor="today">Yes</label>
+//             </li>
+//           </ul>
+//         </div>
+//         <div className="buttons">
+//           <button
+//             className="button save"
+//             onClick={() => {
+//               filterMarkets(
+//                 masterMarketsArray,
+//                 state.filters,
+//                 setFilteredMarkets
+//               );
+//               props.setSidebarOpen(false);
+//             }}
+//           >
+//             Save
+//           </button>
+//           <button className="button reset" onClick={resetFilters}>
+//             Reset Filters
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default Filters;
+// export default Filters;
