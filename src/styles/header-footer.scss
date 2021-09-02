@@ -1,57 +1,106 @@
 .header,
 .footer {
-    padding: 15px 0 15px 0;
-    background-color: orange;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+  padding: 15px 0 15px 0;
+  background-color: orange;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  z-index: 100;
 }
 
 .logo-container {
-    grid-column-start: 2;
-    justify-self: center;
-    align-self: end;
+  grid-column-start: 2;
+  justify-self: center;
+  align-self: end;
 }
 
 .logo {
-    width: 300px;
-    @include breakpoint(mobile) {
-        margin-bottom: -20px;
-        max-width: 135%;
-    }
+  width: 300px;
+  @include breakpoint(mobile) {
+    margin-bottom: -20px;
+    max-width: 135%;
+  }
 }
 
 .question-container {
-    grid-column-start: 3;
-    justify-self: end;
-    align-self: end;
-    &:hover {
-        cursor: pointer;
-    }
-    position: relative;
-    z-index: 900;
-    @include breakpoint(mobile) {
-        margin-bottom: -8px;
-    }
-    z-index: 100;
+  grid-column-start: 3;
+  justify-self: end;
+  align-self: end;
+  &:hover {
+    cursor: pointer;
+  }
+  position: relative;
+  z-index: 900;
+  @include breakpoint(mobile) {
+    margin-bottom: -8px;
+  }
+  z-index: 100;
 
-    .far {
-        margin-right: 2rem;
-        font-size: 1.5rem;
-        color: #3d4954;
-        @include breakpoint(mobile) {
-            font-size: 1.1rem;
-        }
+  .far {
+    margin-right: 2rem;
+    font-size: 1.5rem;
+    color: #3d4954;
+    @include breakpoint(mobile) {
+      font-size: 1.1rem;
     }
+  }
 }
 
 .fas {
-    font-size: 2.2rem;
-    margin-left: 20px;
-    margin-top: 80px;
-    &:hover {
-        cursor: pointer;
+  font-size: 2.2rem;
+  margin-left: 20px;
+  margin-top: 80px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.chip-container {
+  grid-column-start: 2;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  .chip {
+    display: inline-flex;
+    padding: 7px 10px 7px 10px;
+    height: auto;
+    font-size: 0.9rem;
+    border-radius: 25px;
+    background-color: #3a4753;
+    width: max-content;
+    color: white;
+
+    &:after {
+      content: url(../assets/icon-filter-chevron.svg);
+      margin-left: 5px;
+      color: white;
     }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.filter-menu-container {
+  .filter-menu {
+    background-color: #fff;
+    color: #2c2d30;
+    z-index: 110;
+    position: absolute;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(44, 45, 48, 0.2);
+    padding: 20px;
+
+    .filter-menu-title {
+      font-weight: bold;
+      font-size: 1.3rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+  }
 }
