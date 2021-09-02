@@ -6,7 +6,7 @@
     "axios": "^0.21.1",
     "bulma": "^0.8.0",
     "framer-motion": "^4.1.17",
-    "immer": "^9.0.5",
+    "immer": "^9.0.6",
     "leaflet": "^1.7.1",
     "node-fetch": "^2.6.1",
     "node-notifier": "^9.0.1",
