@@ -4,10 +4,10 @@ import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMarketsState } from "../contexts/MarketsContext";
 import axios from "axios";
-import { arcGisPostRequest } from "../utils/getMarkets";
+import { arcGisPostRequest } from "../utils/arcGisPostRequest";
 import marketIcon from "../assets/marker.png";
 
-const PhillyMap = ({ markets }) => {
+const PhillyMap = () => {
   let [state, dispatch] = useMarketsState();
 
   const marketMarker = L.icon({
