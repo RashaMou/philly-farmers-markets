@@ -10,9 +10,15 @@ export function useMarketsState() {
 const marketsStateReducer = (state, action) => {
   switch (action.type) {
     case "ON_SUCCESS": {
+      const neighborhoods = new Set(
+        action.data.map((market) => {
+          return market.attributes.NEIGHBORHOOD.trim();
+        })
+      );
       return {
         markets: action.data,
         filteredMarkets: action.data,
+        neighborhoods: Array.from(neighborhoods),
         error: null,
       };
     }
@@ -40,6 +46,7 @@ const initialState = {
   // markets should never change, we should only work from filtered markets. We use markets to reset the filters.
   markets: [],
   filteredMarkets: [],
+  neighborhoods: [],
   error: "",
 };
 

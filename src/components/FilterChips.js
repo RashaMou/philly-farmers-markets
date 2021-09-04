@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ClickAwayListener from "react-click-away-listener";
+import { useMarketsState } from "../contexts/MarketsContext";
 
 export const FilterChips = () => {
+  let [{ neighborhoods }, dispatch] = useMarketsState();
+
   const [toggleFilter, setToggleFilter] = useState({
     neighborhoods: false,
     assistance: false,
     open: false,
   });
+
+  useEffect(() => {
+    console.log(neighborhoods);
+  }, []);
 
   const handleFilterClick = (menu) => {
     setToggleFilter({ ...toggleFilter, [menu]: !toggleFilter[menu] });
@@ -26,19 +33,22 @@ export const FilterChips = () => {
           <ClickAwayListener
             onClickAway={() => handleClickAway("neighborhoods")}
           >
-            <div className="filter-menu">
+            <ul className="filter-menu">
               <div className="filter-menu-title">Neighborhoods</div>
-              <p>West Philly</p>
-              <p>South Philly</p>
-              <p>Center City</p>
-              <p>Southwest Philly</p>
-              <p>Bridesburg | Kensington | Port Richmond</p>
-              <p>Germantown | Chestnut Hill</p>
-              <p>Roxborough | Manayunk</p>
-              <p>North Philly</p>
-              <p>Northeast Philly</p>
-              <p>Northwest Philly</p>
-            </div>
+              {neighborhoods.map((neighborhood, index) => {
+                return (
+                  <li key={index}>
+                    <input
+                      className="checkbox"
+                      type="checkbox"
+                      id={neighborhood}
+                      name={neighborhood}
+                    />
+                    <label htmlFor={neighborhood}>{neighborhood}</label>
+                  </li>
+                );
+              })}
+            </ul>
           </ClickAwayListener>
         )}
       </div>
@@ -48,12 +58,39 @@ export const FilterChips = () => {
         </div>
         {toggleFilter.assistance && (
           <ClickAwayListener onClickAway={() => handleClickAway("assistance")}>
-            <div className="filter-menu">
+            <ul className="filter-menu">
               <div className="filter-menu-title">Food Assistance</div>
-              <p>SNAP</p>
-              <p>Philly Food Bucks</p>
-              <p>Farmer's Market Nutrition Program</p>
-            </div>
+              <li>
+                <input
+                  className="checkbox"
+                  type="checkbox"
+                  id="snap"
+                  name="snap"
+                />
+
+                <label htmlFor="snap">SNAP</label>
+              </li>
+              <li>
+                <input
+                  className="checkbox"
+                  type="checkbox"
+                  id="food-bucks"
+                  name="food-bucks"
+                />
+                <label htmlFor="food-bucks">Philly Food Bucks</label>
+              </li>
+              <li>
+                <input
+                  className="checkbox"
+                  type="checkbox"
+                  id="nutrition-program"
+                  name="nutrition-program"
+                />
+                <label htmlFor="nutrition-program">
+                  Farmer's Market Nutrition Program
+                </label>
+              </li>
+            </ul>
           </ClickAwayListener>
         )}
       </div>
@@ -65,7 +102,13 @@ export const FilterChips = () => {
           <ClickAwayListener onClickAway={() => handleClickAway("open")}>
             <div className="filter-menu">
               <div className="filter-menu-title">Open Today</div>
-              <p>Yes</p>
+              <input
+                className="checkbox"
+                type="checkbox"
+                id="open"
+                name="open"
+              />
+              <label htmlFor="open">Yes</label>
             </div>
           </ClickAwayListener>
         )}
