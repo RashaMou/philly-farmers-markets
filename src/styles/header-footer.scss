@@ -8,6 +8,8 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   z-index: 100;
+  position:fixed;
+  width: 100%;
 }
 
 .logo-container {
@@ -70,7 +72,8 @@
     height: auto;
     font-size: 0.9rem;
     border-radius: 25px;
-    background-color: #3a4753;
+    background-color: orange;
+    border: 1px solid white;
     width: max-content;
     color: white;
 
@@ -82,9 +85,12 @@
     &:hover {
       cursor: pointer;
     }
-    &:active::after {
-      transform: rotate(180deg);
-    }
+  }
+}
+
+.rotated {
+  &:after {
+    transform: rotate(180deg);
   }
 }
 

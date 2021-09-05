@@ -26,7 +26,10 @@ export const FilterChips = () => {
   return (
     <div className="chip-container">
       <div className="filter-menu-container">
-        <div class="chip" onClick={() => handleFilterClick("neighborhoods")}>
+        <div
+          className={`${toggleFilter.neighborhoods ? "chip rotated" : "chip"}`}
+          onClick={() => handleFilterClick("neighborhoods")}
+        >
           Neighborhoods
         </div>
         {toggleFilter.neighborhoods && (
@@ -53,7 +56,10 @@ export const FilterChips = () => {
         )}
       </div>
       <div className="filter-menu-container">
-        <div class="chip" onClick={() => handleFilterClick("assistance")}>
+        <div
+          className={`${toggleFilter.assistance ? "chip rotated" : "chip"}`}
+          onClick={() => handleFilterClick("assistance")}
+        >
           Food Assistance
         </div>
         {toggleFilter.assistance && (
@@ -95,7 +101,10 @@ export const FilterChips = () => {
         )}
       </div>
       <div className="filter-menu-container">
-        <div class="chip" onClick={() => handleFilterClick("open")}>
+        <div
+          className={`${toggleFilter.open ? "chip rotated" : "chip"}`}
+          onClick={() => handleFilterClick("open")}
+        >
           Open Today
         </div>
         {toggleFilter.open && (
