@@ -11,7 +11,7 @@
     "node-fetch": "^2.6.1",
     "node-notifier": "^9.0.1",
     "node-sass": "^4.13.0",
-    "object-path": "^0.11.5",
+    "object-path": "^0.11.8",
     "primeicons": "^2.0.0",
     "primereact": "^4.0.0",
     "qs": "^6.9.1",
