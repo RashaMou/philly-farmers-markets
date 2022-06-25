@@ -8,7 +8,7 @@
     "framer-motion": "^4.1.17",
     "immer": "^9.0.5",
     "leaflet": "^1.7.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-notifier": "^9.0.1",
     "node-sass": "^4.13.0",
     "object-path": "^0.11.5",
